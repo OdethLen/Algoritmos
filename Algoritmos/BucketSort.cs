@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.XPath;
-
 namespace Algoritmos
 {
     public partial class BucketSort : Form
@@ -162,38 +161,20 @@ namespace Algoritmos
 
             // Copiar elementos de los buckets al arreglo principal
             int index = 0;
-            if (ascending)
+            for (int i = 0; i < bucketCount; i++) // Recorrer los buckets en orden ascendente
             {
-                for (int i = 0; i < bucketCount; i++)
+                for (int j = 0; j < bucketSize; j++)
                 {
-                    for (int j = 0; j < bucketSize; j++)
+                    if (buckets[i][j] != 0)
                     {
-                        if (buckets[i][j] != 0)
-                        {
-                            numbers[index++] = buckets[i][j];
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Recorrer los buckets en orden inverso para el orden descendente
-                for (int i = bucketCount - 1; i >= 0; i--)
-                {
-                    for (int j = 0; j < bucketSize; j++)
-                    {
-                        if (buckets[i][j] != 0) // Extraer los valores correctamente
-                        {
-                            numbers[index++] = buckets[i][j];
-                        }
+                        numbers[index++] = buckets[i][j];
                     }
                 }
             }
 
             // Mostrar el arreglo final ordenado
-            txtOrder.AppendText("\nFinal order: " + string.Join(", ", numbers));
+            txtOrder.AppendText(" \nFinal order: " + string.Join(", ", numbers));
         }
-
         private void AddOriginalBucketState(int[] bucket)
         {
             // Crear un ListViewItem para mostrar el estado original del bucket
